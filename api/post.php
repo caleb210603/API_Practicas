@@ -99,6 +99,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
 
   // Enviar respuesta exitosa
   header("HTTP/1.1 200 OK");
+
+  //Mostrar en pantalla el dato actualizado
+  $sql = $dbConn->prepare("SELECT * FROM books where id=:id");
+  $sql->bindValue(':id', $_GET['id']);
+  $sql->execute();
+  echo json_encode(  $sql->fetch(PDO::FETCH_ASSOC)  );
+
   exit();
 }
 
